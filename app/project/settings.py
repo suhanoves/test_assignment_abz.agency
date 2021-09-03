@@ -26,6 +26,7 @@ INSTALLED_APPS = [
 
     # extra app
     'treebeard',
+    'django.contrib.postgres',
 ]
 
 MIDDLEWARE = [
