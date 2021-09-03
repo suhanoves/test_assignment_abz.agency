@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row d-flex justify-content-center py-3">
+        {# Navbar buttons #}
+        <div class="col col-3">
+                <ul class="nav nav-pills me-auto">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == "employees" %}active{% endif %}"
+                       href="{% url 'employees:employees' %}">
+                        Employees
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == "company_structure" %}active{% endif %}"
+                       href="{% url 'employees:company_structure' %}">
+                        Company structure
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        {# Login/SignUp buttons #}
+        <div class="col col-3 ms-auto text-end">
+            <button type="button" class="btn btn-outline-primary me-2">Login</button>
+            <button type="button" class="btn btn-primary">Sign-up</button>
+
+        </div>
+    </div>
+</div>
