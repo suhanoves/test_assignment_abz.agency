@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col col-12">
+                {# Search form #}
+                <form id="search" method="GET" class="w-90 mb-3 mb-lg-0 me-lg-3">
+                    <input type="search" class="form-control" placeholder="Search..." aria-label="Search"
+                           name="search">
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th class="text-center">Фото</th>
+                        <th>Фамилия</th>
+                        <th>Имя</th>
+                        <th>Отчество</th>
+                        <th class="text-center">Должность</th>
+                        <th class="text-end">Дата трудоустройства</th>
+                        <th class="text-end">Зарплата</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for employee in employee_list %}
+                        <tr>
+                            <td>{{ employee.photo }}</td>
+                            <td>{{ employee.surname }}</td>
+                            <td>{{ employee.name }}</td>
+                            <td>{{ employee.patronymic }}</td>
+                            <td class="text-center">{{ employee.position }}</td>
+                            <td class="text-end">{{ employee.start_date }}</td>
+                            <td class="text-end">{{ employee.salary }}</td>
+                        </tr>
+
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Пагинатор -->
+            {% if page_obj.has_other_pages %}
+                <div class="col g-2">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            {# Предыдущие страницы #}
+                            {% if page_obj.has_previous %}
+                                <li class="page-item"><a class="page-link" href="?page=1">&laquo;</a></li>
+                                <li class="page-item"><a class="page-link"
+                                                         href="?page={{ page_obj.previous_page_number }}">&lsaquo;</a>
+                                </li>
+                            {% endif %}
+
+                            {# Текущие страницы #}
+                            <li class="page-item active"><span class="page-link">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                    </span></li>
+
+                            {# Последующие страницы #}
+                            {% if page_obj.has_next %}
+                                <li class="page-item"><a class="page-link"
+                                                         href="?page={{ page_obj.next_page_number }}">&rsaquo;</a>
+                                </li>
+                                <li class="page-item"><a class="page-link"
+                                                         href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}
