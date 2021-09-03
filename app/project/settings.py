@@ -20,6 +20,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
+
+    # my app
+    'employees.apps.EmployeesConfig',
+
+    # extra app
+    'treebeard',
 ]
 
 MIDDLEWARE = [
