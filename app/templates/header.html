@@ -2,17 +2,17 @@
     <div class="row d-flex justify-content-center py-3">
         {# Navbar buttons #}
         <div class="col col-3">
-                <ul class="nav nav-pills me-auto">
-                <li class="nav-item">
-                    <a class="nav-link {% if request.resolver_match.url_name == "employees" %}active{% endif %}"
-                       href="{% url 'employees:employees' %}">
-                        Employees
-                    </a>
-                </li>
+            <ul class="nav nav-pills me-auto">
                 <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.url_name == "company_structure" %}active{% endif %}"
                        href="{% url 'employees:company_structure' %}">
                         Company structure
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == "employees" %}active{% endif %}"
+                       href="{% url 'employees:employees' %}">
+                        Employees
                     </a>
                 </li>
             </ul>
@@ -20,9 +20,27 @@
 
         {# Login/SignUp buttons #}
         <div class="col col-3 ms-auto text-end">
-            <button type="button" class="btn btn-outline-primary me-2">Login</button>
-            <button type="button" class="btn btn-primary">Sign-up</button>
-
+            {% if user.is_authenticated %}
+                <div class="flex-shrink-0 dropdown">
+                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle me-1">
+                    <a href="#" class="link-dark text-decoration-none dropdown-toggle" id="dropdownUser"
+                       data-bs-toggle="dropdown" aria-expanded="true">
+                        {% firstof user.get_fullname user.get_username|title 'User' %}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="dropdownUser"
+                        style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(-134px, 34px);"
+                        data-popper-placement="bottom-end">
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">Sign out</a></li>
+                    </ul>
+                </div>
+            {% else %}
+                <a href="{% url 'accounts:login' %}" class="btn btn-outline-primary me-2" role="button">Login</a>
+                <a href="{% url 'accounts:signup' %}" class="btn btn-primary" role="button">Sign-up</a>
+            {% endif %}
         </div>
     </div>
 </div>
