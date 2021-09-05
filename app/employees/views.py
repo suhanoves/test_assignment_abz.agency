@@ -1,5 +1,7 @@
-from django.views.generic import TemplateView, ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.postgres.search import SearchVector
+from django.views.generic import TemplateView, ListView
+
 from employees.models import Employee
 
 
@@ -15,10 +17,10 @@ class CompanyStructureView(TemplateView):
         return context
 
 
-class EmployeesView(ListView):
+class EmployeesView(LoginRequiredMixin, ListView):
     model = Employee
     template_name = 'employees/employees.html'
-    paginate_by = 18
+    paginate_by = 15
     ordering = ['surname']
 
     def get_queryset(self):
