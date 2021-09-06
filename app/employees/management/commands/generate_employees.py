@@ -1,6 +1,7 @@
 import itertools
 import json
 import random
+from pathlib import Path
 
 from django.core.management import BaseCommand, CommandError
 from mimesis import Generic
@@ -49,7 +50,7 @@ class Command(BaseCommand):
         position = random.choice(POSITIONS[lvl])
         start_date = str(cls.generic.datetime.date(start=2000, end=2021))
         salary = f"{random.choice(SALARIES[lvl])}.00"
-        photo = ""
+        photo = str(Path(f"/photos/{gender.value}/{str(random.randint(1, 20)).zfill(2)}.jpg"))
 
         employee = {"model": model,
                     "pk": pk,
