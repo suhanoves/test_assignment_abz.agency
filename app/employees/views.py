@@ -1,7 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.postgres.search import SearchVector
-from django.views.generic import TemplateView, ListView
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView, DetailView
 
+from employees.forms import EmployeeForm
 from employees.models import Employee
 
 
@@ -33,3 +35,27 @@ class EmployeesView(LoginRequiredMixin, ListView):
             ).filter(search=search)
 
         return queryset
+
+
+class EmployeeDetailView(DetailView):
+    model = Employee
+
+
+class EmployeeCreate(CreateView):
+    model = Employee
+    form_class = EmployeeForm
+    success_url = reverse_lazy('employees:employees')
+
+
+class EmployeeEdit(UpdateView):
+    model = Employee
+    form_class = EmployeeForm
+    # fields = ('name', 'patronymic', 'surname', 'position', 'start_date', 'salary', 'photo')
+    success_url = reverse_lazy('employees:employees')
+
+
+class EmployeeDelete(DeleteView):
+    model = Employee
+    success_url = reverse_lazy('employees:employees')
+
+    # TODO переопределить логику, чтобы при удалении переназначался начальник

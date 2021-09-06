@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col col-auto text-center">
+            <div>
+                <i class="bi bi-person-lines-fill" style="font-size: 4rem; color: cornflowerblue;"></i>
+            </div>
+
+            {% crispy form %}
+
+{#            <form method="POST" enctype='multipart/form-data'>#}
+{#                {% csrf_token %}#}
+{#                {{ form|crispy }}#}
+{#                <button type="submit">Save changes</button>#}
+{#            </form>#}
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col col-auto text-center">
+            <div>
+                <i class="bi bi-person-x-fill text-danger" style="font-size: 4rem; color: cornflowerblue;"></i>
+                <h1>Are you sure you want to delete employee<br>
+                    <span class="text-danger">{{ employee }}</span>?</h1>
+            </div>
+
+            <div class="mt-5">
+                <form method="POST" class="uniForm">
+                    {% csrf_token %}
+                    <a class="btn btn-lg btn-primary mx-3" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+                    <button class="btn btn-lg btn-danger mx-3" type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
