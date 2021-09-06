@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <div class="row">
+            <div class="col">
+                {% for employee, info in company_structure %}
+                    {% if info.open %}
+                        <ul>
+                        <li>
+                            {% else %}
+                        </li>
+                        <li>
+                    {% endif %}
+
+                <div class="btn btn-outline-dark p-2 m-1">
+                    <a class='text-decoration-none text-dark' href="{{ employee.get_absolute_url }}">{{ employee.position }} — {{ employee }}</a>
+                </div>
+
+                {% for close in info.close %}
+                    </li></ul>
+                {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+{% endblock content %}

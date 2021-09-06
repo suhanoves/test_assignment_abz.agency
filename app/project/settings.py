@@ -20,6 +20,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
+
+    # my app
+    'employees.apps.EmployeesConfig',
+
+    # extra app
+    'treebeard',
+    'django.contrib.postgres',
+    'crispy_forms',
+    "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [
@@ -83,7 +92,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Internationalization
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'Europe/Moscow'
 
@@ -95,7 +104,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = os.getenv('STATIC_URL')
-STATIC_ROOT = BASE_DIR / os.getenv('STATIC_ROOT')
+if DEBUG:
+    STATICFILES_DIRS = (
+        BASE_DIR / 'static',
+    )
+else:
+    STATIC_ROOT = BASE_DIR / os.getenv('STATIC_ROOT')
 
 # Media files
 MEDIA_URL = os.getenv('MEDIA_URL')
@@ -106,3 +120,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Authentication
 AUTH_USER_MODEL = 'accounts.CustomUser'
+LOGIN_REDIRECT_URL = 'homepage'
+LOGOUT_REDIRECT_URL = 'homepage'
+
+# Crispy forms
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
